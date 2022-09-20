@@ -1,0 +1,15 @@
+:root {
+   --background: transparent;
+   --textPrimaryColor: white;
+   --borderColor: rgba(182, 176, 182, 0.3);
+   --accentColor: purple;
+   --logo-font-family: 'Bungee Spice', cursive;
+   --primaryFont: 'Oswald', sans-serif;
+}
+
+[data-theme='dark'] {
+   --textPrimaryColor: black;
+   --text-primary: white;
+   --text-secondary: grey;
+   --accent: darkred;
+}
