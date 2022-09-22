@@ -1,5 +1,3 @@
-// @use '../../styles/variables.scss';
-
 .formContainer {
    width: 100%;
    height: 100vh;
@@ -92,19 +90,6 @@
       &:hover {
          background-color: aliceblue;
          color: black;
-      }
-   }
-
-   label {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-      cursor: pointer;
-
-      span {
-         margin-left: 10px;
       }
    }
 }

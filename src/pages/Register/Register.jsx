@@ -13,7 +13,7 @@ export const Register = () => {
                <input type="text" placeholder="pasword" />
                <input id="file" type="file" style={{ display: 'none' }} />
                <label htmlFor="file">
-                  Upload your image{' '}
+                  Add an avatar
                   <span class="material-symbols-outlined">add_a_photo</span>
                </label>
 
