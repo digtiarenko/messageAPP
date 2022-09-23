@@ -1,0 +1,38 @@
+.message {
+   display: flex;
+   //    border: 1px solid black;
+   background-color: var(--borderColor);
+   max-width: 80%;
+   padding: 5px;
+   gap: 10px;
+
+   img {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+   }
+   .messageInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 54px;
+      span {
+         font-size: 12px;
+         color: var(--textBlackColor);
+      }
+   }
+   .messageContent {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      img {
+         width: 150px;
+         height: auto;
+         object-fit: cover;
+      }
+   }
+}

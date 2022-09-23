@@ -1,12 +1,12 @@
 .chat {
    display: flex;
    flex-direction: column;
-   justify-content: space-between;
-
+   // justify-content: space-between;
    margin-left: 7px;
+
    .chatHeader {
       @media screen and (min-width: 1297px) {
-         height: 42px;
+         min-height: 40px;
       }
       display: flex;
       justify-content: flex-end;
@@ -14,7 +14,7 @@
       background-color: var(--borderColor);
       border-radius: 0px 12px 0px 0px;
       padding-right: 10px;
-      height: 86px;
+      min-height: 82px;
 
       .avatar {
          height: 30px;
@@ -27,22 +27,28 @@
    .input {
       display: flex;
       gap: 5px;
-
-      //   position: relative;
    }
 
    .messages {
       display: flex;
-      height: 100%;
+      height: calc(100% - 82px);
+      // margin-bottom: auto;
       flex-direction: column;
       justify-content: space-between;
+      @media screen and (min-width: 1297px) {
+         height: calc(100% - 40px);
+      }
 
       .messageWrap {
+         display: flex;
+         flex-direction: column;
+         gap: 5px;
          margin-top: 5px;
+         margin-bottom: auto;
          height: 100%;
-         border: 1px solid black;
+         // border: 1px solid black;
          overflow-y: auto;
-         //  background-color: var(--borderColor);
+         //
       }
    }
    .textarea {

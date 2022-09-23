@@ -14,8 +14,19 @@ export const Chat = () => {
          </div>
          <div className="messages">
             <div className="messageWrap">
-               <Message />
-               <Message />
+               <Message type={'income'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
+               <Message type={'outcome'} />
             </div>
             <div className="input">
                <textarea
