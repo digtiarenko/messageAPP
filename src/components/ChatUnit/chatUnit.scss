@@ -1,0 +1,32 @@
+.chatUnit {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex-wrap: nowrap;
+   width: 100%;
+   margin-bottom: 5px;
+   color: var(--textPrimaryColor);
+   &:hover {
+      background-color: var(--highlightColor);
+      color: var(--textBlackColor);
+   }
+}
+
+.userInfo {
+   display: flex;
+   flex-direction: column;
+   padding: 5px;
+   align-items: center;
+   background-color: var(--borderColor);
+}
+.userChat {
+   width: 100%;
+   // height: 100%;
+   display: flex;
+   align-self: stretch;
+   margin: 0px 0px 0px 5px;
+   // text-align: center;
+   justify-content: center;
+   align-items: center;
+   background-color: var(--borderColor);
+}

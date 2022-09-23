@@ -1,0 +1,102 @@
+.chat {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+   margin-left: 7px;
+   .chatHeader {
+      @media screen and (min-width: 1297px) {
+         height: 42px;
+      }
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background-color: var(--borderColor);
+      border-radius: 0px 12px 0px 0px;
+      padding-right: 10px;
+      height: 86px;
+
+      .avatar {
+         height: 30px;
+         width: 30px;
+         border-radius: 50%;
+         object-fit: cover;
+      }
+   }
+
+   .input {
+      display: flex;
+      gap: 5px;
+
+      //   position: relative;
+   }
+
+   .messages {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .messageWrap {
+         margin-top: 5px;
+         height: 100%;
+         border: 1px solid black;
+         overflow-y: auto;
+         //  background-color: var(--borderColor);
+      }
+   }
+   .textarea {
+      resize: none;
+      bottom: 0px;
+      width: calc(100% - 14px);
+      height: 54px;
+      margin-top: 5px;
+      margin-right: auto;
+      padding: 7px 7px;
+      border: none;
+      //   border-radius: 0px 0px 12px 0px;
+      text-align: center;
+
+      background-color: var(--borderColor);
+      outline: none;
+      color: white;
+
+      &::placeholder {
+         color: rgb(108, 108, 108);
+         font-family: var(--primaryFont);
+      }
+   }
+}
+
+.sendElement {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+
+   gap: 5px;
+   //    position: absolute;
+   right: 0;
+   top: 0;
+   .icon {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      color: var(--textPrimaryColor);
+   }
+}
+button {
+   width: 150px;
+   height: 30px;
+   outline: none;
+   cursor: pointer;
+   font-family: var(--primaryFont);
+   border: none;
+   background-color: var(--borderColor);
+   border-radius: 5px;
+   color: aliceblue;
+
+   &:hover {
+      background-color: aliceblue;
+      color: black;
+   }
+}
