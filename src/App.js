@@ -6,9 +6,9 @@ import './styles/variables.scss';
 function App() {
    return (
       <div>
-         <Home />
+         {/* <Home /> */}
          {/* <Login /> */}
-         {/* <Register /> */}
+         <Register />
       </div>
    );
 }
