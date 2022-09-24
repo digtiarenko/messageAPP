@@ -4,6 +4,9 @@
    .navbar {
       display: flex;
       flex-wrap: wrap;
+      @media screen and (min-width: 1297px) {
+         flex-wrap: nowrap;
+      }
       align-items: center;
       gap: 10px;
       margin-right: 8px;
@@ -75,8 +78,6 @@
          }
       }
       .listUnit {
-         //  display: flex;
-
          .chatUnit {
             display: flex;
             align-items: center;

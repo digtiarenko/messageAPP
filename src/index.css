@@ -37,3 +37,22 @@ ul {
    margin: 0;
    list-style: none;
 }
+::-webkit-scrollbar {
+   width: 5px;
+   margin-right: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+   background: var(--highlightColor);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background: var(--textBlackColor);
+}
