@@ -23,6 +23,7 @@
       }
 
       .user {
+         width: 150px;
          margin-left: auto;
          margin-right: auto;
          display: flex;
@@ -58,6 +59,7 @@
    }
    .list {
       margin-right: 8px;
+      height: 100%;
       .searchBar {
          display: block;
          width: calc(100%);
@@ -78,23 +80,12 @@
          }
       }
       .listUnit {
-         .chatUnit {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-            width: 100%;
-            margin-bottom: 5px;
-            color: var(--textPrimaryColor);
-            &:hover {
-               background-color: var(--highlightColor);
-               color: var(--textBlackColor);
-            }
-         }
-
+         height: calc(100% - 117px);
+         overflow: auto;
          .userInfo {
             display: flex;
             flex-direction: column;
+            min-width: 50px;
             padding: 5px;
             align-items: center;
             background-color: var(--borderColor);
