@@ -5,11 +5,12 @@ import { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
-   const [error, setError] = useState(false);
+   const [error, setError] = useState(null);
    const [loading, setLoading] = useState(false);
-   // const navigate = useNavigate();
+   const navigate = useNavigate();
 
    const handleSubmit = async e => {
       e.preventDefault();
@@ -17,7 +18,6 @@ export const Register = () => {
       const email = e.target[1].value;
       const password = e.target[2].value;
       const file = e.target[3].files[0];
-
       try {
          //Create user
          const res = await createUserWithEmailAndPassword(
@@ -46,16 +46,16 @@ export const Register = () => {
                   });
                   //create empty user chats on firestore
                   await setDoc(doc(db, 'userChats', res.user.uid), {});
-                  // navigate('/');
+                  navigate('/');
                } catch (err) {
                   console.log(err);
-                  setError(true);
+                  setError(err);
                   setLoading(false);
                }
             });
          });
       } catch (err) {
-         setError(true);
+         setError(err);
          setLoading(false);
       }
    };
@@ -66,12 +66,13 @@ export const Register = () => {
             <h2 className="title">Sign up</h2>
             <form className="form" onSubmit={handleSubmit}>
                <input
+                  required
                   type="text"
                   name="chatName"
                   placeholder="pick your chat name"
                />
-               <input type="email" placeholder="email" />
-               <input type="text" placeholder="pasword" />
+               <input required type="email" placeholder="email" />
+               <input required type="text" placeholder="pasword" />
                <input id="file" type="file" style={{ display: 'none' }} />
                <label htmlFor="file">
                   Add an avatar
@@ -79,11 +80,15 @@ export const Register = () => {
                </label>
 
                <button type="submit">GO</button>
-               {error && (
-                  <span style={{ color: 'red' }}>Something went wrong</span>
-               )}
             </form>
-            <p> Already have an account? Login</p>
+            {error && (
+               <span style={{ color: 'red' }}>
+                  Something went wrong: {error.message}
+               </span>
+            )}
+            <Link to="/login">
+               <p> Already have an account? Login</p>
+            </Link>
          </div>
       </div>
    );

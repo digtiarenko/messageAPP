@@ -13,6 +13,7 @@ hr {
 
 a {
    text-decoration: none;
+   color: inherit;
 }
 /* Utilities */
 h1,
