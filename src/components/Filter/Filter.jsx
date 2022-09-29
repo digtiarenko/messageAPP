@@ -3,7 +3,7 @@
 // import { db } from '../../firebase';
 // import { AuthContext } from '../../context/authContext';
 
-export const Filter = ({ setUserName, handleFilter }) => {
+export const Filter = ({ setUserName, handleFilter, userName }) => {
    const handleKey = e => {
       e.code === 'Enter' && handleFilter();
       console.log('click');
@@ -14,6 +14,7 @@ export const Filter = ({ setUserName, handleFilter }) => {
          onKeyDown={handleKey}
          onChange={e => setUserName(e.target.value)}
          type="text"
+         value={userName}
          placeholder="find a friend here"
          className="searchBar"
       />

@@ -1,4 +1,19 @@
 import { Message } from 'components/Message/Message';
+import { AuthContext } from 'context/authContext';
+import { onSnapshot } from 'firebase/firestore';
+import {
+   collection,
+   query,
+   where,
+   getDocs,
+   setDoc,
+   doc,
+   updateDoc,
+   serverTimestamp,
+   getDoc,
+} from 'firebase/firestore';
+import { useEffect, useState, useContext } from 'react';
+import { db } from '../../firebase';
 import './chat.scss';
 
 export const Chat = () => {
@@ -14,9 +29,6 @@ export const Chat = () => {
          </div>
          <div className="messages">
             <div className="messageWrap">
-               <Message type={'income'} />
-               <Message type={'outcome'} />
-               <Message type={'outcome'} />
                <Message type={'outcome'} />
                <Message type={'outcome'} />
                <Message type={'outcome'} />
@@ -40,9 +52,7 @@ export const Chat = () => {
                <div className="sendElement">
                   <label htmlFor="file" className="icon">
                      Add a picture
-                     <span className="material-symbols-outlined">
-                        add_a_photo
-                     </span>
+                     <span className="material-symbols-outlined">add_a_photo</span>
                   </label>
                   <button type="" className="button">
                      Send
