@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ChatUnit } from 'components/ChatUnit/ChatUnit';
 import { Filter } from 'components/Filter/Filter';
 import { AuthContext } from 'context/authContext';
+import { ChatContext } from 'context/chatContext';
 import { signOut } from 'firebase/auth';
 import { useContext } from 'react';
 import { auth } from '../../firebase';
@@ -25,6 +26,8 @@ export const Sidebar = () => {
    const [user, setUser] = useState('');
    const [error, setError] = useState('');
    const { currentUser } = useContext(AuthContext);
+   const { dispatch } = useContext(ChatContext);
+
    const [chats, setChats] = useState([]);
 
    const handleFilter = async () => {
@@ -40,34 +43,39 @@ export const Sidebar = () => {
       }
    };
    const handleSelect = async () => {
-      const combinedID =
-         currentUser.uid > user.uid ? currentUser.uid + user.uid : user.uid + currentUser.uid;
+      const combinedId =
+         currentUser?.uid > user.uid ? currentUser.uid + user.uid : user.uid + currentUser.uid;
+
       try {
-         const res = await getDoc(doc(db, 'chats', combinedID));
+         const res = await getDoc(doc(db, 'chat', combinedId));
 
          if (!res.exists()) {
-            await setDoc(doc(db, 'chat', combinedID), { messages: [] });
+            await setDoc(doc(db, 'chat', combinedId), { messages: [] });
 
             await updateDoc(doc(db, 'userChats', currentUser.uid), {
-               [combinedID + '.userInfo']: {
+               [combinedId + '.userInfo']: {
                   uid: user.uid,
                   displayName: user.displayName,
                   photoURL: user.photoURL,
                },
-               [combinedID + '.date']: serverTimestamp(),
+               [combinedId + '.date']: serverTimestamp(),
             });
             await updateDoc(doc(db, 'userChats', user.uid), {
-               [combinedID + '.userInfo']: {
+               [combinedId + '.userInfo']: {
                   uid: currentUser.uid,
                   displayName: currentUser.displayName,
                   photoURL: currentUser.photoURL,
                },
-               [combinedID + '.date']: serverTimestamp(),
+               [combinedId + '.date']: serverTimestamp(),
             });
          }
       } catch (error) {}
       setUser(null);
       setUserName('');
+   };
+
+   const handlePickChat = u => {
+      dispatch({ type: 'CHANGE_USER', payload: u });
    };
 
    useEffect(() => {
@@ -81,8 +89,6 @@ export const Sidebar = () => {
       };
       currentUser.uid && getChats();
    }, [currentUser.uid]);
-   console.log(chats);
-   console.log('userName', userName);
 
    return (
       <div className="sidebar">
@@ -106,11 +112,20 @@ export const Sidebar = () => {
             />
             {error && <span> Not found</span>}
             <ul className="listUnit">
-               {user && <ChatUnit content={chats} startChat={handleSelect} user={user} />}
+               {user && (
+                  <li className="chatUnit" onClick={handleSelect}>
+                     <div className="userInfo">
+                        <img className="avatar" src={user.photoURL} alt="" />
+                        <span>{user.displayName}</span>
+                     </div>
+                  </li>
+               )}
 
-               {Object.entries(chats)?.map(chat => (
-                  <ChatUnit key={chat[0]} chat={chat} startChat={handleSelect} />
-               ))}
+               {Object.entries(chats)
+                  ?.sort((a, b) => b[1].date - a[1].date)
+                  .map(chat => (
+                     <ChatUnit key={chat[0]} chat={chat} startChat={handlePickChat} />
+                  ))}
             </ul>
          </div>
       </div>

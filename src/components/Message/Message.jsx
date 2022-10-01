@@ -1,39 +1,38 @@
 import './message.scss';
+import React, { useContext, useEffect, useRef } from 'react';
 import { MESSAGE_TYPE } from '../../constants/messageType';
+import { AuthContext } from 'context/authContext';
+import { ChatContext } from 'context/chatContext';
 
-export const Message = ({ type }) => {
+export const Message = ({ message }) => {
+   const { currentUser } = useContext(AuthContext);
+   const { data } = useContext(ChatContext);
+   const ref = useRef();
+
    let styles;
-   switch (type) {
-      case 'income':
-         styles = MESSAGE_TYPE.income;
-         break;
-      case 'outcome':
-         styles = MESSAGE_TYPE.outcome;
-         break;
-      default:
-         break;
-   }
+   message.senderId === currentUser.uid
+      ? (styles = MESSAGE_TYPE.outcome)
+      : (styles = MESSAGE_TYPE.income);
+
+   useEffect(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
+   }, [message]);
 
    return (
       <div className="message" style={styles}>
          <div className="messageInfo">
             <img
                className="avatar"
-               src="https://static.wixstatic.com/media/9fd359_d63e59f338694736affc6fa986369c30~mv2.png/v1/fill/w_315,h_409,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Facepic.png"
+               src={
+                  message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL
+               }
                alt="avatar"
             />
             <span>just now</span>
          </div>
          <div className="messageContent">
-            {/* <p>
-               message Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-               consectetur adipisicing elit. Quaerat, sed?
-            </p> */}
-            <img
-               className="userImg"
-               src="https://static.wixstatic.com/media/9fd359_d63e59f338694736affc6fa986369c30~mv2.png/v1/fill/w_315,h_409,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Facepic.png"
-               alt="avatar"
-            />
+            <p>{message.text}</p>
+            {message.img && <img src={message.img} alt="" />}
          </div>
       </div>
    );
